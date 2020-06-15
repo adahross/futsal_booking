@@ -1,10 +1,15 @@
 package futsal.com.futsalbooking.services;
 
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.HibernateException;
+import org.hibernate.JDBCException;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.hibernate.type.TrueFalseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +27,18 @@ public class UserService {
         return (List<User>) repo.findAll();
     }
      
-    public void save(User User) {
+    public User save(User User) throws SQLException, HibernateException{
+        
         repo.save(User);
+		return User;
+
+        
+    }
+    public User update(User User){
+       
+        repo.updateUser(User.getEmail(),User.getPhoneNo(),User.getFullname(),User.getUsername());
+		return User;
+        
     }
      
     public User get(String id) {

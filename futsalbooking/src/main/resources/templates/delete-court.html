@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    </link>
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet" type="text/css">
+    </link>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Navigation -->
+        <div th:insert="fragments/navigation :: header"></div>
+
+
+        <div class="container">
+            <legend>Delete Court</legend>
+            <!--<form action="delete" method="post">-->
+            <div class="breadcrumb">
+                <a href="/futsalbooking/" class="breadcrumb-item">Home</a>
+                <a href="/futsalbooking/courts" class="breadcrumb-item">List Of Courts</a>
+                <a class="breadcrumb-item">Delete Court</a>
+
+            </div>
+            <br /><br />
+            <div th:if="${courts}">
+                <table border="0">
+                    <tr>
+                        <td>Court ID</td>
+                        <td>:</td>
+                        <td th:utext="${courts.courtID}">...</td>
+                    </tr>
+                    <tr>
+                        <td>Court Name</td>
+                        <td>:</td>
+                        <td th:utext="${courts.courtName}">...</td>
+                    </tr>
+                    <tr>
+                        <td>Court Type</td>
+                        <td>:</td>
+                        <td th:utext="${courts.courtType}">...</td>
+                    </tr>
+                </table>
+                <br /><br />
+                <div th:if="not ${allowDelete}">
+
+                    <a th:href="@{/delete/{courtID}(courtID=${court.courtID})}">Delete</a>
+                </div>
+                <form th:if="${allowDelete}" th:action="@{/deletecourt/{courtID}(courtID=${courts.courtID})}"
+                    method="POST">
+
+                    Delete this contact? <input type="submit" th:value="Yes" />
+                </form>
+            </div>
+            <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+            <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

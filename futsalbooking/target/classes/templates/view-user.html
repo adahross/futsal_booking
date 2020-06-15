@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    </link>
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet" type="text/css">
+    </link>
+    <style>
+        .container-my-5 {
+            padding: 1cm;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:insert="fragments/navigation :: header"></div>
+    <div class="container-my-5">
+        <div class="breadcrumb">
+            <a href="/futsalbooking/" class="breadcrumb-item">Home</a>
+            <a href="/futsalbooking/users" class="breadcrumb-item">List Of Users</a>
+            <a class="breadcrumb-item">View User</a>
+
+        </div>
+        <h2 class="mb-5">View User</h2>
+        <div class="col-md-6">
+            <table class="table table-dark" th:object="${user}">
+                <tr>
+                    <th>User Name</th>
+                    <td th:text="*{username}"></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td th:text="*{email}"></td>
+                </tr>
+                <tr>
+                    <th>Phone Number</th>
+                    <td th:text="*{phoneNo}"></td>
+                </tr>
+                <tr>
+                    <th>Full Name</th>
+                    <td th:text="*{fullname}"></td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

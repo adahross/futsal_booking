@@ -25,6 +25,9 @@ public class CourtService {
     public void save(Court Court) {
         repo.save(Court);
     }
+      public void update(Court Court) {
+        repo.save(Court);
+    }
      
     public Court get(int id) {
         return repo.findById(id).get();
@@ -34,5 +37,9 @@ public class CourtService {
         repo.deleteById(id);
     }
     
+    public void updateCourtStatus(int id, String status) {
+        repo.updateStatus(status, id);
+        
+    }
 
 }

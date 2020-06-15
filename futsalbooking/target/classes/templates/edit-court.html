@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    </link>
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet" type="text/css">
+    </link>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Navigation -->
+        <div th:insert="fragments/navigation :: header"></div>
+        <div class="container-my-5">
+            <div class="breadcrumb">
+                <a href="/futsalbooking/" class="breadcrumb-item">Home</a>
+                <a href="/futsalbooking/courts" class="breadcrumb-item">List of Courts</a>
+                <a class="breadcrumb-item">Edit Court</a>
+
+            </div>
+            <h2>Edit Court</h2>
+            <br>
+
+            <form th:action="${add} ? @{/addcourt} : @{/{courtID}/editcourt(courtID=${courts.courtID})}"
+                th:object="${courts}" method="POST">
+                <!--<form action="editcourt" method="post">-->
+
+                <div class="form-group">
+                    <label class="col-form-label" for="courtID">Court ID</label>
+                    <input class="form-control" type="text" name="courtID" id="courtID" th:field="*{courtID}" readonly>
+                    <!-- <td><input type="text" th:field="*{courtName}" /></td> -->
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="courtName">Court Name</label>
+                    <input class="form-control" type="text" name="courtName" id="courtName" th:field="*{courtName}"
+                        required>
+                    <!-- <td><input type="text" th:field="*{courtName}" /></td> -->
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label" for="courtType">Court Type</label>
+                    <select class="form-control" id="courtType" name="courtType">
+                        <option th:value="*{courtType}" selected th:text="*{courtType}"></option>
+                        <option value="Indoor Court">Indoor Court</option>
+                        <option value="Outdoor Court">Outdoor Court</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label" for="courtStat">Court Status</label>
+
+                    <select class="form-control" id="courtStat" name="courtStat">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Deactive</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="price">Price</label>
+                    <input class="form-control" type="number" name="price" id="price" th:value="*{price}" required>
+                    <!-- <td><input type="number" th:field="*{price}" /></td -->
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-form-label" for="image">Image</label>
+                    <input class="input-group" type="file" name="image" id="image" placeholder="Image" required>
+                </div>
+
+                <!--<input type="submit" value="Add Court">-->
+                <input class="btn btn-primary" type="submit" th:value="${add} ? 'Create' : 'Update'" />
+            </form>
+
+        </div>
+        <!-- /.row -->
+
+        <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+
+    </div>
+</body>
+
+</html>

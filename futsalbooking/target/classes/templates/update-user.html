@@ -1,9 +1,67 @@
-<form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
-    <label for="name">Name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="Name">
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-    <label for="email">Email</label>
-    <input type="text" th:field="*{email}" id="email" placeholder="Email">
-    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-    <input type="submit" value="Update User">   
-</form>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    </link>
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet" type="text/css">
+    </link>
+    <style>
+        .container-my-5 {
+            padding: 1cm;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:insert="fragments/navigation :: header"></div>
+    <div class="breadcrumb">
+        <a href="/futsalbooking/" class="breadcrumb-item">Home</a>
+        <a href="/futsalbooking/users" class="breadcrumb-item">List Of Users</a>
+        <a class="breadcrumb-item">Update User</a>
+
+    </div>
+    <div class="container-my-5">
+        <h2 class="mb-5">Update User</h2>
+        <div class="jumbotron">
+            <div class="col-md-6">
+                <form action="#" th:action="@{/update/{username}(username=${user.username})}" th:object="${user}"
+                    method="post">
+                    <div class="form-group">
+                        <label for="username" class="col-form-label">UserName</label>
+                        <input type="text" th:field="*{username}" class="form-control" id="username" readonly>
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-form-label">Email</label>
+                        <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email">
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname" class="col-form-label">Full Name</label>
+                        <input type="text" th:field="*{fullname}" class="form-control" id="fullname" placeholder="fullname">
+                        <span th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNo" class="col-form-label">Phone Number</label>
+                        <input type="text" th:field="*{phoneNo}" class="form-control" id="phoneNo" placeholder="phoneNo">
+                        <span th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-5">
+                           <input type="submit" class="btn btn-primary" value="Update User">
+                        </div>
+                    </div>    
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    </body>
+    
+</html>

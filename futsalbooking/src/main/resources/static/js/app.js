@@ -1,10 +1,9 @@
 $(document).ready(function () {
     $.ajax({
         type: "get",
-        url: "courts",
+        url: "api/courts",
         dataType: "json",
         success: function (data) {
-            console.log(data);
 
             $.each(data, function (index, item) {
 
@@ -24,5 +23,34 @@ $(document).ready(function () {
             });
 
         }
+    });
+
+    $("#listcourts").on("click", "span", function () {
+        var parentTR = $(this).parent().parent();
+
+        var id = parentTR.find('#id').html();
+        $.ajax({
+            type: "GET", //not restful => php not recognize put
+            contentType: "application/json",
+            url: 'api/updatecourtstatus/' + id,
+            dataType: 'json',
+            success: function (data) {
+                if (data.courtStat == "Inactive") {
+                    parentTR.find("#status").html("<span class='btn btn-danger'>InActive</span>");
+                }
+                if (data.courtStat == "Active") {
+                    parentTR.find('#status').html("<span class='btn btn-success'>Active</span>");
+                }
+                alert("Court status update successful");
+
+            },
+
+            error: function () {
+                alert("Court status update failed - please try again: ");
+
+
+            },
+
+        });
     });
 });

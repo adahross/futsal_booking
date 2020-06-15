@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    </link>
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet" type="text/css">
+    </link>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+        integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    </link>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Navigation -->
+        <div th:insert="fragments/navigation :: header"></div>
+
+        <div th:switch="${courts}">
+            <h2 th:case="null">No courts yet!</h2>
+            <div th:case="*">
+                <h2>List of Courts</h2>
+                <br>
+                <div class="breadcrumb">
+                    <a href="/futsalbooking/" class="breadcrumb-item">Home</a>
+                    <a class="breadcrumb-item">List Of Courts</a>
+
+                </div>
+                <a href="addcourt" class="btn btn-primary">Add Court<i class="fas fa-user-plus ml-2"></i></a>
+                <br>
+                <br>
+                <table id="listcourts" class="table table-striped table-responsive" style=" text-align: center;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Court Name</th>
+                            <th>Court Type</th>
+                            <th>Court Status</th>
+                            <th>Court Price</th>
+
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="court : ${courts}">
+                            <td id="id" th:text="${court.courtID}"></td>
+                            <td th:text="${court.courtName}"></td>
+                            <td th:text="${court.courtType}"></td>
+                            <td id="status" th:switch="${court.courtStat}">
+                                <span th:case="Active" class='btn btn-success'>Active</span>
+                                <span th:case="Inactive" class='btn btn-danger small'>InActive</span>
+                            </td>
+                            <td th:text="${court.price}"></td>
+
+                            <td style="flex-wrap: nowrap;"><a th:href="@{/{courtID}/edit(courtID=${court.courtID})}"><i
+                                        class="fas fa-edit ml-2"></i></a></td>
+                            <td> <a th:href="@{/courtdelete/{courtID}(courtID=${court.courtID})}"><i
+                                        class="fas fa-trash ml-2"></i></a></td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/app.js}"></script>
+
+</body>
+
+</html>
