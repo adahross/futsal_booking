@@ -89,8 +89,7 @@ return "index-court";
    @PostMapping("/deletecourt/{courtID}")
    public String deleteCourt(@PathVariable("courtID") int id, Model model) {
     courtService.delete(id);
-    model.addAttribute("courts", courtService.listAll());
-      return "index-court";
+     return "redirect:/courts";
    }
    
   }
