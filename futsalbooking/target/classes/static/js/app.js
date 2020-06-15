@@ -1,4 +1,11 @@
+///
+//
+//  IMPLEMENTATION OF REST API 
+//
+///
 $(document).ready(function () {
+
+    //DISPLAY LIST OF COURTS IN HOMEPAGE
     $.ajax({
         type: "get",
         url: "api/courts",
@@ -25,6 +32,8 @@ $(document).ready(function () {
         }
     });
 
+
+    // DO THE UPDATE STATUS OF THE COURT
     $("#listcourts").on("click", "span", function () {
         var parentTR = $(this).parent().parent();
 
