@@ -39,7 +39,7 @@ $(document).ready(function () {
 
         var id = parentTR.find('#id').html();
         $.ajax({
-            type: "GET", //not restful => php not recognize put
+            type: "PUT", //not restful => php not recognize put
             contentType: "application/json",
             url: 'api/updatecourtstatus/' + id,
             dataType: 'json',
