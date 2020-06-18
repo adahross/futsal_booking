@@ -20,8 +20,13 @@ import futsal.com.futsalbooking.repositories.UserRepository;
 @Transactional
 public class UserService {
     
+
+    //INSTANTIATE USER REPOSITORY OBJECT TO BE IMPLEMENTED IN SERVICE
      @Autowired
-    private UserRepository repo;
+     private UserRepository repo;
+    
+
+     // DEFINE ALL CRUD OPERATIONS AND RETURN THE APPROPRIATE DATA (LIST, USER OBJECT, ETC..)
      
     public List<User> listAll() {
         return (List<User>) repo.findAll();

@@ -15,9 +15,8 @@ import futsal.com.futsalbooking.services.UserService;
  */
 @Controller
 public class HomeController {
-    @Autowired
-    private UserService userService;
-
+    
+    
     @RequestMapping("/")
     public String viewHome() {
         return "index";

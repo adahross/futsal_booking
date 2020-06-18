@@ -14,6 +14,8 @@ import futsal.com.futsalbooking.repositories.CourtRepository;
 @Transactional
 public class CourtService {
     
+     // DEFINE ALL CRUD OPERATIONS AND RETURN THE APPROPRIATE DATA (LIST, COURT OBJECT, ETC..)
+     
   
   @Autowired
     private CourtRepository repo;

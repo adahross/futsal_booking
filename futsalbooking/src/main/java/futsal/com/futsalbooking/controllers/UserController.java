@@ -25,10 +25,11 @@ import futsal.com.futsalbooking.services.UserService;
 @Controller
 public class UserController {
 
+  //DEFINE SERVICE TO RETREIVE DATA FROM USERREPOSITORY.JAVA
   @Autowired
   private UserService userService;
 
-  private UserRepository userRepository;
+  //GET ALL USERS AND DISPLAY THE LISTS IN index-user.html
 
   @GetMapping("/users")
   public String index(Model model) {
@@ -41,39 +42,40 @@ public class UserController {
   // return "index-user";
   // }
 
+  //DISPLAY ADD USER FORM
+
   @GetMapping("/signup")
   public String showSignUpForm(User user) {
 
     return "add-user";
   }
+  
 
+  //POST - ADD USER INTO DATABASE
   @PostMapping("/adduser")
-     public String addUser(@Valid User user, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-       if (result.hasErrors()) {
-        model.addAttribute("user", user);
-         return "add-user";
-       }
-      
-      
-       try {
-          user.setUsertype(0);
-          userService.save(user); 
-            model.addAttribute("users", userService.listAll());
-            return "redirect:/users";
-        }
- 
-        catch (Exception e) {
-          model.addAttribute("user", user);
-          redirectAttributes.addFlashAttribute("message", "Email has been taken");
-          redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
-          return "redirect:/signup";
-        }
-       
-      
-        
-        
+  public String addUser(@Valid User user, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    if (result.hasErrors()) {
+      model.addAttribute("user", user);
+      return "add-user";
+    }
+
+    try {
+      user.setUsertype(0);
+      userService.save(user);
+      model.addAttribute("users", userService.listAll());
+      return "redirect:/users";
+    }
+
+    catch (Exception e) {
+      model.addAttribute("user", user);
+      redirectAttributes.addFlashAttribute("message", "Email has been taken");
+      redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
+      return "redirect:/signup";
+    }
+
   }
 
+  //GET - GET USER VIA USERNAME DISPLAY USER FORM EDIT IN UPDATE-USER.HTML
   @GetMapping("/edit/{username}")
   public String showUpdateForm(@PathVariable("username") String id, Model model) {
 
@@ -81,6 +83,7 @@ public class UserController {
     return "update-user";
   }
 
+  //POST - UPDATE USER INFO IN DATABASE
   @PostMapping("/update/{username}")
   public String updateUser(@PathVariable("username") String id, @Valid User user, BindingResult result, Model model,
       RedirectAttributes redirectAttributes) {
@@ -97,18 +100,19 @@ public class UserController {
     return "redirect:/users";
   }
 
-   @GetMapping("/view/{username}")
+  //GET - GET USER VIA USERNAME DISPLAY USER INFORMATION IN VIEW-USER.HTML
+  @GetMapping("/view/{username}")
   public String viewUser(@PathVariable("username") String id, Model model) {
     model.addAttribute("user", userService.get(id));
     return "view-user";
   }
 
+  //DELETE USER VIA USERNAME
   @GetMapping("/delete/{username}")
   public String deleteUser(@PathVariable("username") String id, Model model) {
     userService.delete(id);
     model.addAttribute("users", userService.listAll());
     return "redirect:/users";
   }
-
 
 }

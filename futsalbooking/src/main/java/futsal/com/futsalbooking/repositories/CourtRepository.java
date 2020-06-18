@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 import futsal.com.futsalbooking.models.Court;
 
+//INHERIT THE COURT REPOSITORY WITH JPA REPOSITORY WHICH CONSIST OF PREDEFINED METHOD FOR CRUD OPERATION
+
 public interface CourtRepository extends JpaRepository<Court, Integer> {
     
 
@@ -16,5 +18,7 @@ public interface CourtRepository extends JpaRepository<Court, Integer> {
     @Modifying
     @Query(value = "UPDATE court c set courtStat =:courtStat where c.courtID = :courtID",
             nativeQuery = true)
+
+    //DEFINE NATIVE QUERY FOR UPDATE STATUS FOR COURT.
     void updateStatus(@Param("courtStat") String courtStat, @Param("courtID") int courtID);
 }
